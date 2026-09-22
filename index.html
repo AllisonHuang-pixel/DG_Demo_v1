@@ -1779,6 +1779,8 @@ body::after{
 .nav-panel{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;justify-content:center;max-width:500px;}
 /* QA jump list is for desktop testing only — hide on a real phone */
 @media (max-width:500px){ .nav-panel{display:none !important;} }
+/* Custom cursor is desktop-only (mouse) — hide on real mobile/touch */
+@media (max-width:500px),(hover:none){ #cur,#cur-ring{display:none !important;} }
 .nav-panel-title{display:none;}
 .nav-panel-btn{display:flex;align-items:center;gap:5px;padding:6px 10px;background:rgba(255,255,255,.55);border:1px solid rgba(184,149,106,.18);border-radius:20px;cursor:pointer;transition:all .18s;white-space:nowrap;}
 .nav-panel-btn::before{display:none;}
