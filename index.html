@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>DOLCE&GABBANA Beauty — Virtual Try-On</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -72,6 +72,20 @@ body::after{
 /* home indicator */
 .phone::after{content:'';position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:100px;height:4px;background:rgba(26,23,20,.18);border-radius:2px;z-index:200;}
 
+/* ─── On a real phone (iPhone / iPhone Pro Max width), drop the desktop "mockup" chrome
+       and let the prototype fill the actual screen edge-to-edge ─── */
+@media (max-width:500px){
+  .outer{padding:0;gap:0;min-height:100dvh;}
+  .outer::before{display:none;}
+  .phone{
+    width:100%;height:100dvh;
+    border-radius:0;box-shadow:none;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  .phone::before,.phone::after{display:none;}
+}
+
 /* ─── SCREENS ─── */
 .screen{
   position:absolute;inset:0;
@@ -81,6 +95,9 @@ body::after{
   transition:opacity .65s cubic-bezier(.4,0,.2,1),transform .65s cubic-bezier(.4,0,.2,1);
   transform:translateY(18px);
   overflow:hidden;
+}
+@media (max-width:500px){
+  .screen{ width:100%;height:100%; }
 }
 .screen.active{opacity:1;pointer-events:all;transform:none;position:absolute;}
 .screen.exit{opacity:0;transform:translateY(-20px);}
@@ -1762,6 +1779,8 @@ body::after{
 
 /* ── Nav Panel ── */
 .nav-panel{display:flex;flex-direction:row;flex-wrap:wrap;gap:6px;justify-content:center;max-width:500px;}
+/* QA jump list is for desktop testing only — hide on a real phone */
+@media (max-width:500px){ .nav-panel{display:none !important;} }
 .nav-panel-title{display:none;}
 .nav-panel-btn{display:flex;align-items:center;gap:5px;padding:6px 10px;background:rgba(255,255,255,.55);border:1px solid rgba(184,149,106,.18);border-radius:20px;cursor:pointer;transition:all .18s;white-space:nowrap;}
 .nav-panel-btn::before{display:none;}
@@ -2272,21 +2291,8 @@ body::after{
     <button class="nav-panel-btn"        id="navBtn9" onclick="goNav(9)"><span class="nav-btn-num">09</span><span class="nav-btn-label">Save &amp; Shop</span></button>
     <button class="nav-panel-btn"        id="navBtn10" onclick="goNav(10)"><span class="nav-btn-num">10</span><span class="nav-btn-label">Your Look</span></button>
   </div>
-    <button class="nav-panel-btn active" id="navBtn1"  onclick="goNav(1)" ><span class="nav-btn-num">01</span><span class="nav-btn-label">Entry</span></button>
-    <button class="nav-panel-btn"        id="navBtn2"  onclick="goNav(2)" ><span class="nav-btn-num">02</span><span class="nav-btn-label">Privacy</span></button>
-    <button class="nav-panel-btn"        id="navBtn3"  onclick="goNav(3)" ><span class="nav-btn-num">03</span><span class="nav-btn-label">AI Intro</span></button>
-    <button class="nav-panel-btn"        id="navBtn4"  onclick="goNav(4)" ><span class="nav-btn-num">04</span><span class="nav-btn-label">Look Survey</span></button>
-    <button class="nav-panel-btn"        id="navBtn5"  onclick="goNav(5)" ><span class="nav-btn-num">05</span><span class="nav-btn-label">Loading</span></button>
-    <button class="nav-panel-btn"        id="navBtn6"  onclick="goNav(6)" ><span class="nav-btn-num">06</span><span class="nav-btn-label">Face Scan</span></button>
-    <button class="nav-panel-btn"        id="navBtn7"  onclick="goNav(7)" ><span class="nav-btn-num">07</span><span class="nav-btn-label">AI Transform</span></button>
-    <button class="nav-panel-btn"        id="navBtn8"  onclick="goNav(8)" ><span class="nav-btn-num">08</span><span class="nav-btn-label">Products</span></button>
-    <button class="nav-panel-btn"        id="navBtn9"  onclick="goNav(9)" ><span class="nav-btn-num">09</span><span class="nav-btn-label">VTO Live</span></button>
-    <button class="nav-panel-btn"        id="navBtn10" onclick="goNav(10)"><span class="nav-btn-num">10</span><span class="nav-btn-label">Compare</span></button>
-    <button class="nav-panel-btn"        id="navBtn11" onclick="goNav(11)"><span class="nav-btn-num">11</span><span class="nav-btn-label">Save &amp; Shop</span></button>
-  </div>
 
 
-</div><!-- /phone -->
 </div><!-- /outer -->
 
 <script>
